@@ -1,15 +1,4 @@
-﻿"Household spending, Canada, regions and provinces c 1 2 3 4 5 6"
-"Frequency: Annual"
-"Table: 11-10-0222-01 (formerly CANSIM 203-0021)"
-"Release date: 2023-10-18"
-"Geography: Canada, Geographical region of Canada, Province or territory"
-""
-""
-
-"Geography","Canada 7",,,,,,,,,,,
-"Statistic","Average expenditure per household",,,,,,,,,,,
-"Household expenditures, summary-level categories","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021"
-,"Dollars",,,,,,,,,,,
+﻿"Household expenditures/summary-level categories","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021"
 "Total expenditure","72,075","73,646","75,695","79,098","80,727","82,697","84,489","86,479","..","93,724","..","92,500"
 "Total current consumption","54,013","55,227","56,330","58,576","59,055","60,516","62,183","63,944","..","68,980","..","67,126"
 "Food expenditures","7,850","7,791","7,760","7,934","8,109","8,629","8,784","8,968","..","10,311","..","10,305"
@@ -48,28 +37,3 @@
 "Income taxes 8","12,393","12,545","13,240","14,038","14,867","15,334","15,310","15,144","..","17,167","..","18,181"
 "Personal insurance payments and pension contributions","4,018","4,210","4,284","4,570","4,871","4,880","5,067","5,184","..","5,297","..","5,519"
 "Gifts of money, support payments and charitable contributions","1,651","1,664","1,840","1,914","1,934","1,967","1,929","2,207","..","2,280","..","1,674"
-
-Symbol legend:
-.., not available for a specific reference period
-
-
-"Table Corrections:"
-Date,Note
-"2017-11-09","On November 9, 2017, the data from 2014 were corrected for the series "Makeup, skin care, manicure and fragrance products". As a result, the data for the series "Personal care products", "Personal care", "Total current consumption" and "Total expenditure" may have also changed."
-
-
-
-Footnotes:
-1,"For more information about survey methodology, data quality, variable definitions and data products, see the Survey of Household Spending User Guide (catalogue number 62F0026MIE) available free on the Statistics Canada website: <a href="https://www5.statcan.gc.ca/bsolc/olc-cel/olc-cel?catno=62F0026M&chropg=1&lang=eng">Household expenditures research papers series</a>."
-2,"For 2012, household expenditure data were also collected in the three territories. The data are available in table 11-10-0126-01 (formerly CANSIM table 203-0030). However, caution should be used when comparing provincial and territorial data since the collection method was different in the territories."
-3,"Starting with the 2017 reference year, the Survey of Household Spending (SHS) uses survey weights which take into account population projections from the 2016 Census. Estimates from SHS 2010 to 2016 are based on survey weights which take into account population projections from the 2011 Census."
-4,"To ensure data quality, suppression of expenditure estimates is based on the coefficient of variation (CV). Expenditures that have a CV greater than or equal to 35% are suppressed as they are too unreliable to be published."
-5,"Starting with the 2017 reference year, the Survey of Household Spending is conducted every two years."
-6,"The 2019 Survey of Household Spending questionnaire was streamlined to reduce respondent burden. As a result, some data series are no longer available or have been combined to create new series starting with reference year 2019. As well, estimates for some expenditure categories in 2019 may no longer be directly comparable to those from previous years due to changes to the questionnaire and/or to the mode used to collect certain expenditures. Additional information on the impact of these changes is available upon request."
-7,"Canada-level statistics include the 10 provinces only."
-8,"Starting in 2014, expenditure estimates for provincial health insurance premiums are included with income taxes. These estimates are calculated using information from personal income tax data (T1). Previously, provincial health insurance premiums were included with health care expenditures."
-
-
-
-"How to cite: Statistics Canada. Table 11-10-0222-01  Household spending, Canada, regions and provinces"
-https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1110022201
