@@ -1,0 +1,75 @@
+﻿"Household spending, Canada, regions and provinces c 1 2 3 4 5 6"
+"Frequency: Annual"
+"Table: 11-10-0222-01 (formerly CANSIM 203-0021)"
+"Release date: 2023-10-18"
+"Geography: Canada, Geographical region of Canada, Province or territory"
+""
+""
+
+"Geography","Canada 7",,,,,,,,,,,
+"Statistic","Average expenditure per household",,,,,,,,,,,
+"Household expenditures, summary-level categories","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021"
+,"Dollars",,,,,,,,,,,
+"Total expenditure","72,075","73,646","75,695","79,098","80,727","82,697","84,489","86,479","..","93,724","..","92,500"
+"Total current consumption","54,013","55,227","56,330","58,576","59,055","60,516","62,183","63,944","..","68,980","..","67,126"
+"Food expenditures","7,850","7,791","7,760","7,934","8,109","8,629","8,784","8,968","..","10,311","..","10,305"
+"Food purchased from stores","5,709","5,573","5,564","5,718","5,880","6,126","6,176","6,364","..","7,536","..","8,065"
+"Food purchased from restaurants","2,141","2,218","2,195","2,216","2,229","2,502","2,608","2,604","..","2,775","..","2,189"
+"Shelter","15,020","15,215","15,807","16,361","17,160","17,509","18,032","18,640","..","20,200","..","21,106"
+"Principal accommodation","13,586","13,981","14,364","14,891","15,471","15,802","16,293","16,811","..","18,371","..","19,582"
+"Rented living quarters","3,088","3,224","3,521","3,234","3,589","3,790","3,868","4,038","..","4,160","..","4,145"
+"Owned living quarters","8,259","8,434","8,536","9,278","9,332","9,534","9,965","10,287","..","11,676","..","12,700"
+"Water, fuel and electricity for principal accommodation","2,240","2,324","2,307","2,380","2,551","2,478","2,460","2,486","..","2,535","..","2,737"
+"Other accommodation","1,433","1,234","1,444","1,470","1,689","1,707","1,739","1,829","..","1,829","..","1,523"
+"Household operations","3,887","4,165","4,122","4,344","4,393","4,490","4,704","4,709","..","5,448","..","5,587"
+"Communications","1,742","1,824","1,851","1,997","2,096","2,187","2,246","2,404","..","2,670","..","3,001"
+"Household furnishings and equipment","1,972","2,027","2,165","1,974","2,067","2,166","2,300","2,271","..","2,486","..","3,570"
+"Household furnishings","896","861","978","854","925","947","935","973","..","1,124","..","1,591"
+"Household equipment","944","1,039","1,055","986","1,015","1,088","1,218","1,140","..","1,218","..","1,727"
+"Household appliances","415","448","485","450","461","465","537","533","..","582","..","817"
+"Clothing and accessories","3,467","3,355","3,461","3,551","3,503","3,374","3,371","3,453","..","3,344","..","2,303"
+"Transportation","11,156","11,262","11,202","12,044","11,891","11,761","11,909","12,721","..","12,737","..","10,099"
+"Private transportation","10,097","10,193","10,076","10,832","10,717","10,538","10,660","11,436","..","11,258","..","9,501"
+"Public transportation","1,060","1,069","1,126","1,212","1,175","1,224","1,249","1,285","..","1,479","..","598"
+"Health care","2,237","2,210","2,303","2,475","2,251","2,361","2,574","2,564","..","2,780","..","2,776"
+"Direct health care costs to household","1,655","1,580","1,594","1,730","1,558","1,643","1,824","1,799","..","1,918","..","2,059"
+"Personal care","949","1,067","1,194","1,226","1,205","1,316","1,311","1,189","..","1,384","..","1,430"
+"Recreation","3,606","3,725","3,808","3,930","3,843","3,981","3,935","3,979","..","4,624","..","4,223"
+"Recreational equipment and related services","927","862","920","981","827","954","914","980","..","995","..","1,539"
+"Home entertainment equipment and services","486","413","334","298","253","261","200","203","..","209","..","371"
+"Recreational services","1,600","1,761","1,848","1,956","2,064","2,148","2,132","2,184","..","2,593","..","1,168"
+"Recreational vehicles and associated services","593","689","706","695","698","618","689","613","..","826","..","1,144"
+"Education","1,152","1,211","1,410","1,518","1,502","1,540","1,688","1,783","..","1,691","..","1,797"
+"Reading materials and other printed matter","201","219","213","183","144","168","156","154","..","165","..","199"
+"Tobacco products, alcoholic beverages and cannabis for non-medical use","..","..","..","..","..","..","..","..","..","1,785","..","1,803"
+"Tobacco products and alcoholic beverages (Terminated)","1,206t","1,201t","1,244t","1,352t","1,222t","1,336t","1,406t","1,463t","..t","..t","..t","..t"
+"Games of chance","147","168","202","162","156","180","217","183","..","186","..","173"
+"Miscellaneous expenditures","1,163","1,609","1,440","1,521","1,608","1,703","1,794","1,865","..","1,838","..","1,754"
+"Income taxes 8","12,393","12,545","13,240","14,038","14,867","15,334","15,310","15,144","..","17,167","..","18,181"
+"Personal insurance payments and pension contributions","4,018","4,210","4,284","4,570","4,871","4,880","5,067","5,184","..","5,297","..","5,519"
+"Gifts of money, support payments and charitable contributions","1,651","1,664","1,840","1,914","1,934","1,967","1,929","2,207","..","2,280","..","1,674"
+
+Symbol legend:
+.., not available for a specific reference period
+
+
+"Table Corrections:"
+Date,Note
+"2017-11-09","On November 9, 2017, the data from 2014 were corrected for the series "Makeup, skin care, manicure and fragrance products". As a result, the data for the series "Personal care products", "Personal care", "Total current consumption" and "Total expenditure" may have also changed."
+
+
+
+Footnotes:
+1,"For more information about survey methodology, data quality, variable definitions and data products, see the Survey of Household Spending User Guide (catalogue number 62F0026MIE) available free on the Statistics Canada website: <a href="https://www5.statcan.gc.ca/bsolc/olc-cel/olc-cel?catno=62F0026M&chropg=1&lang=eng">Household expenditures research papers series</a>."
+2,"For 2012, household expenditure data were also collected in the three territories. The data are available in table 11-10-0126-01 (formerly CANSIM table 203-0030). However, caution should be used when comparing provincial and territorial data since the collection method was different in the territories."
+3,"Starting with the 2017 reference year, the Survey of Household Spending (SHS) uses survey weights which take into account population projections from the 2016 Census. Estimates from SHS 2010 to 2016 are based on survey weights which take into account population projections from the 2011 Census."
+4,"To ensure data quality, suppression of expenditure estimates is based on the coefficient of variation (CV). Expenditures that have a CV greater than or equal to 35% are suppressed as they are too unreliable to be published."
+5,"Starting with the 2017 reference year, the Survey of Household Spending is conducted every two years."
+6,"The 2019 Survey of Household Spending questionnaire was streamlined to reduce respondent burden. As a result, some data series are no longer available or have been combined to create new series starting with reference year 2019. As well, estimates for some expenditure categories in 2019 may no longer be directly comparable to those from previous years due to changes to the questionnaire and/or to the mode used to collect certain expenditures. Additional information on the impact of these changes is available upon request."
+7,"Canada-level statistics include the 10 provinces only."
+8,"Starting in 2014, expenditure estimates for provincial health insurance premiums are included with income taxes. These estimates are calculated using information from personal income tax data (T1). Previously, provincial health insurance premiums were included with health care expenditures."
+
+
+
+"How to cite: Statistics Canada. Table 11-10-0222-01  Household spending, Canada, regions and provinces"
+https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1110022201
