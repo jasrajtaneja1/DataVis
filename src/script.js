@@ -6,13 +6,29 @@ function parseData(data) {
   const parsedData = {
     years: {},
     category: "",
+    familyType: "",
+    ageRange: "",
+    product: "",
   };
 
+  let familyType;
   for (const key in data) {
     if (data.hasOwnProperty(key)) {
       const value = data[key];
       if (key === "Household expenditures/summary-level categories") {
         parsedData.category = value;
+      } else if (key === "Family type") {
+        if (value && value !== "") {
+          console.log("truers");
+          familyType = value;
+        }
+        parsedData.familyType = familyType;
+        // console.log(familyType);
+        console.log(`value: ${value}, familyType: ${familyType}`);
+      } else if (key === "Age of older adult 4") {
+        parsedData.ageRange = value;
+      } else if (key === "Products 5") {
+        parsedData.product = value;
       } else {
         if (value === "..") {
           parsedData.years[key] = null; // Handle missing data
@@ -35,7 +51,7 @@ const svg = d3
   .attr("transform", `translate(${margin.left},${margin.top})`);
 
 // Load and process data
-d3.csv("./data/household_spending.csv", (d) => {
+d3.csv("./data/household_income.csv", (d) => {
   console.log(parseData(d));
   return parseData(d);
 })
