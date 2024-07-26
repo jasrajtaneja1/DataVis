@@ -6,12 +6,10 @@ function parseData(data) {
   const parsedData = {
     years: {},
     category: "",
+    ageGroup: "",
     familyType: "",
-    ageRange: "",
     product: "",
   };
-
-  let familyType;
   for (const key in data) {
     if (data.hasOwnProperty(key)) {
       const value = data[key];
@@ -19,14 +17,11 @@ function parseData(data) {
         parsedData.category = value;
       } else if (key === "Family type") {
         if (value && value !== "") {
-          console.log("truers");
           familyType = value;
         }
         parsedData.familyType = familyType;
-        // console.log(familyType);
-        console.log(`value: ${value}, familyType: ${familyType}`);
-      } else if (key === "Age of older adult 4") {
-        parsedData.ageRange = value;
+      } else if (key === "Age of older adult") {
+        parsedData.ageGroup = value;
       } else if (key === "Products 5") {
         parsedData.product = value;
       } else {
