@@ -2,13 +2,46 @@ const width = 1000;
 const height = 700;
 const margin = { top: 50, right: 225, bottom: 30, left: 60 };
 
-function parseData(data, minYear = 0, maxYear = 0) {
+function generateYearsList(min = 2001) {
+  let years = [{ value: 0, text: " -- " }];
+  for (let i = min; i < 2022; i++) {
+    var singleObj = {};
+    singleObj["value"] = i;
+    singleObj["text"] = `${i}`;
+    years.push(singleObj);
+  }
+  return years;
+}
+
+function updateYearOptions() {
+  minYear.innerHTML = "";
+  maxYear.innerHTML = "";
+
+  const selectedContent = chartContent.value;
+  const min = selectedContent === "income" ? 2001 : 2010;
+  const years = generateYearsList(min);
+
+  // Populate minYear dropdown
+  years.forEach((year) => {
+    const option = document.createElement("option");
+    option.value = year.value;
+    option.textContent = year.text;
+    minYear.appendChild(option);
+  });
+  years.forEach((year) => {
+    const option = document.createElement("option");
+    option.value = year.value;
+    option.textContent = year.text;
+    maxYear.appendChild(option);
+  });
+}
+
+function parseData(data) {
   const parsedData = {
     years: {},
     category: "",
     ageGroup: "",
     familyType: "",
-    product: "",
   };
   for (const key in data) {
     if (data.hasOwnProperty(key)) {
@@ -44,6 +77,22 @@ function parseData(data, minYear = 0, maxYear = 0) {
 
   return parsedData;
 }
+
+// Event Listeners
+const types = [];
+const form = document.querySelector("form");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  types.forEach((e) => types.pop());
+  document.querySelectorAll('[type="checkbox"]').forEach((e) => {
+    if (e.checked === true) {
+      console.log(`submitted ${e.value}`);
+      types.push(e.value);
+    }
+  });
+  console.log(`types: ${types}`);
+});
+chartContent.addEventListener("change", updateYearOptions);
 
 document.getElementById("chartContent").onchange = () => {
   generateChart(document.getElementById("chartContent"));
