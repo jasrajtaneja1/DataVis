@@ -1,6 +1,6 @@
 const width = 1000;
-const height = 500;
-const margin = { top: 20, right: 225, bottom: 30, left: 40 };
+const height = 700;
+const margin = { top: 50, right: 225, bottom: 30, left: 60 };
 
 function parseData(data) {
   const parsedData = {
@@ -68,6 +68,16 @@ const svg = d3
   .attr("height", height)
   .append("g")
   .attr("transform", `translate(${margin.left},${margin.top})`);
+
+// Add title
+svg
+  .append("text")
+  .attr("x", (width - margin.left - margin.right) / 2)
+  .attr("y", -margin.top / 2)
+  .attr("text-anchor", "middle")
+  .style("font-size", "20px")
+  .style("font-weight", "bold")
+  .text("Household Expenditures and Inflation Impact");
 
 // Load and process data
 d3.csv("./data/household_spending.csv", (d) => {
