@@ -2,7 +2,7 @@ const width = 1000;
 const height = 700;
 const margin = { top: 50, right: 225, bottom: 30, left: 60 };
 
-function parseData(data) {
+function parseData(data, minYear = 0, maxYear = 0) {
   const parsedData = {
     years: {},
     category: "",
@@ -25,10 +25,18 @@ function parseData(data) {
       } else if (key === "Products 5") {
         parsedData.product = value;
       } else {
-        if (value === "..") {
-          parsedData.years[key] = null; // Handle missing data
+        if (minYear) {
+          if (value === "..") {
+            parsedData.years[key] = null; // Handle missing data
+          } else {
+            parsedData.years[key] = parseInt(value.replace(/,/g, ""), 10);
+          }
         } else {
-          parsedData.years[key] = parseInt(value.replace(/,/g, ""), 10);
+          if (value === "..") {
+            parsedData.years[key] = null; // Handle missing data
+          } else {
+            parsedData.years[key] = parseInt(value.replace(/,/g, ""), 10);
+          }
         }
       }
     }
@@ -260,6 +268,15 @@ function incomeChart() {
     .style("font-size", "20px")
     .style("font-weight", "bold")
     .text("Income Change Over Years by Family Type");
+
+  svg
+    .append("text")
+    .attr("x", width / 3)
+    .attr("y", 0 - margin.top / 6)
+    .attr("text-anchor", "middle")
+    .style("font-size", "16px")
+    .style("text-decoration", "underline")
+    .text("Median Expenditure per Household");
 
   // Load and process data
   return d3
