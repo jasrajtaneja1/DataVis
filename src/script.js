@@ -264,65 +264,59 @@ function incomeChart() {
   // Load and process data
   return d3
     .csv("./data/household_income.csv", (d) => {
-      const parsed = {
-        category: d["Family type"],
-        ageGroup: d["Age of older adult"],
-        years: Object.keys(d).reduce((acc, key) => {
-          if (key !== "Family type" && key !== "Age of older adult") {
-            acc[key] = d[key] === ".." ? null : +d[key].replace(/,/g, "");
-          }
-          return acc;
-        }, {}),
-      };
-      return parsed;
+      return parseData(d);
     })
     .then((data) => {
       console.log("Data loaded:", data);
 
       // Define categories
-      const categories = ["Couple families", "Lone-parent families", "Persons not in census families"];
-      const years = Object.keys(data[0].years).map(d => +d);
+      const categories = [
+        "Couple families",
+        "Lone-parent families",
+        "Persons not in census families",
+      ];
+      const years = Object.keys(data[0].years).map((d) => +d);
 
       // Prepare data for line chart
-      const series = categories.map(category => ({
+      const series = categories.map((category) => ({
         name: category,
-        values: years.map(year => ({
+        values: years.map((year) => ({
           year: year,
-          value: data.find(d => d.category === category).years[year]
-        }))
+          value: data.find((d) => d.familyType === category).years[year],
+        })),
       }));
 
       // Filter valid data
-      const validData = series.map(s => ({
+      const validData = series.map((s) => ({
         name: s.name,
-        values: s.values.filter(v => v.value !== null)
+        values: s.values.filter((v) => v.value !== null),
       }));
 
       // Create scales
       const x = d3
         .scaleTime()
-        .domain(d3.extent(years, d => d))
+        .domain(d3.extent(years, (d) => d))
         .range([0, width - margin.left - margin.right]);
 
       const y = d3
         .scaleLinear()
-        .domain([
-          0,
-          d3.max(validData, s => d3.max(s.values, v => v.value))
-        ])
+        .domain([0, d3.max(validData, (s) => d3.max(s.values, (v) => v.value))])
         .nice()
         .range([height - margin.top - margin.bottom, 0]);
 
-      const color = d3.scaleOrdinal().domain(categories).range(d3.schemeCategory10);
+      const color = d3
+        .scaleOrdinal()
+        .domain(categories)
+        .range(d3.schemeCategory10);
 
       // Create line generator
       const line = d3
         .line()
-        .x(d => x(d.year))
-        .y(d => y(d.value));
+        .x((d) => x(d.year))
+        .y((d) => y(d.value));
 
       // Append lines for each category
-      validData.forEach(category => {
+      validData.forEach((category) => {
         svg
           .append("path")
           .datum(category.values)
@@ -339,7 +333,7 @@ function incomeChart() {
           "transform",
           `translate(0,${height - margin.top - margin.bottom})`
         )
-        .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%Y")));
+        .call(d3.axisBottom(x).tickFormat(d3.format("d")));
 
       // Add y-axis
       svg.append("g").call(d3.axisLeft(y));
@@ -355,7 +349,7 @@ function incomeChart() {
           .text(category.name);
       });
     })
-    .catch(error => {
+    .catch((error) => {
       console.error("Error loading or processing data:", error);
     });
 }
