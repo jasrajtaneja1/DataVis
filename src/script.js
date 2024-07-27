@@ -43,6 +43,7 @@ document.getElementById("chartContent").onchange = () => {
 
 function generateChart(e) {
   var value = e.value;
+  d3.select("#chartInner").remove();
   switch (value) {
     case "all":
       console.log("showing all");
@@ -57,29 +58,30 @@ function generateChart(e) {
       console.log("unknown");
       return;
   }
-  return;
 }
 
-const svg = d3
-  .select("#chart")
-  .append("svg")
-  .attr("width", width)
-  .attr("height", height)
-  .append("g")
-  .attr("transform", `translate(${margin.left},${margin.top})`);
-
-// Add title
-svg
-  .append("text")
-  .attr("x", (width - margin.left - margin.right) / 2)
-  .attr("y", -margin.top / 2)
-  .attr("text-anchor", "middle")
-  .style("font-size", "20px")
-  .style("font-weight", "bold")
-  .text("Household Expenditures and Inflation Impact");
-
-// Load and process data
 function spendingChart() {
+  const svg = d3
+    .select("#chart")
+    .append("svg")
+    .attr("id", "chartInner")
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  // Add title
+  svg
+    .append("text")
+    .attr("x", (width - margin.left - margin.right) / 2)
+    .attr("y", -margin.top / 2)
+    .attr("text-anchor", "middle")
+    .style("font-size", "20px")
+    .style("font-weight", "bold")
+    .text("Inflation Impact on Household Expenditures");
+
+  // Load and process data
+
   return d3
     .csv("./data/household_spending.csv", (d) => {
       return parseData(d);
@@ -188,11 +190,11 @@ function spendingChart() {
       svg
         .append("text")
         .attr("x", width / 3)
-        .attr("y", 0 - margin.top / 4)
+        .attr("y", 0 - margin.top / 6)
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
         .style("text-decoration", "underline")
-        .text("Average/Median per Household");
+        .text("Average Expenditure per Household");
 
       // Append paths for each area
       svg
