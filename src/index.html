@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>D3 Stacked Area Chart</title>
     <script src="https://d3js.org/d3.v6.min.js"></script>
-   
-</head>
-<body>
-    <h1>D3 Stacked Area Chart</h1>
+  </head>
+  <body>
+    <h1>Impact of Inflation Chart</h1>
+    <div style="margin-bottom: 10px">
+      <label for="chartContent">Select the Data:</label>
+      <select name="chartContent" id="chartContent">
+        <option value="all">Show Income and Spending</option>
+        <option value="income">Show Income Only</option>
+        <option value="spending">Show Spending Only</option>
+      </select>
+    </div>
     <div id="chart"></div>
     <script src="./script.js" defer></script>
-</body>
+  </body>
 </html>
