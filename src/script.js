@@ -1,6 +1,6 @@
 const width = 1000;
-const height = 400;
-const margin = { top: 20, right: 225, bottom: 30, left: 40 };
+const height = 700;
+const margin = { top: 50, right: 225, bottom: 30, left: 60 };
 
 function parseData(data) {
   const parsedData = {
@@ -45,6 +45,15 @@ const svg = d3
   .append("g")
   .attr("transform", `translate(${margin.left},${margin.top})`);
 
+// Add title
+svg.append("text")
+  .attr("x", (width - margin.left - margin.right) / 2)
+  .attr("y", -margin.top / 2)
+  .attr("text-anchor", "middle")
+  .style("font-size", "20px")
+  .style("font-weight", "bold")
+  .text("Household Expenditures and Inflation Impact");
+
 // Load and process data
 d3.csv("./data/household_spending.csv", (d) => {
   return parseData(d);
@@ -52,10 +61,17 @@ d3.csv("./data/household_spending.csv", (d) => {
   .then((data) => {
     // Define new grouped categories
     const newCategories = {
-      "Basic Needs": ["Shelter", "Food expenditures", "Health care"],
-      "Lifestyle": ["Clothing and accessories", "Transportation", "Education"],
+      "Total Expenditure": ["Total expenditure"],
+      "Income Taxes": ["Income taxes 8"],
+      "Basic Needs": ["Shelter", "Food expenditures", "Health care", "Personal insurance payments and pension contributions"],
+      "Lifestyle and Education": ["Clothing and accessories", "Transportation", "Education"],
       "Leisure and Contributions": ["Recreation", "Gifts of money, support payments and charitable contributions"],
-      "Total expenditure": ["Total expenditure"]
+      "Household Operations": ["Household operations", "Communications", "Household furnishings and equipment", "Household appliances"],
+      "Miscellaneous": ["Reading materials and other printed matter", "Tobacco products, alcoholic beverages and cannabis", "Games of chance", "Miscellaneous expenditures", "Personal care"],
+      "Principal Accommodation": ["Principal accommodation", "Rented living quarters", "Owned living quarters", "Water, fuel and electricity for principal accommodation", "Other accommodation"],
+      "Food": ["Food purchased from stores", "Food purchased from restaurants"],
+      "Transportation Details": ["Private transportation", "Public transportation"],
+      "Recreational Details": ["Recreational equipment and related services", "Home entertainment equipment and services", "Recreational services", "Recreational vehicles and associated services"]
     };
 
     // Aggregate data for each new category
@@ -88,8 +104,8 @@ d3.csv("./data/household_spending.csv", (d) => {
       .domain(Object.keys(newCategories))
       .range(d3.schemeCategory10);
 
-    // Stack the data with "Total expenditure" on top
-    const stackOrder = Object.keys(newCategories).filter(key => key !== "Total expenditure").concat("Total expenditure");
+    // Stack the data with "Total Expenditure" and "Income Taxes" on top
+    const stackOrder = Object.keys(newCategories).filter(key => key !== "Total Expenditure" && key !== "Income Taxes").concat(["Income Taxes", "Total Expenditure"]);
     const stack = d3.stack()
       .keys(stackOrder)
       .value((d, key) => d[key]);
