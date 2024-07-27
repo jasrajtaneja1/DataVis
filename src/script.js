@@ -61,7 +61,7 @@ d3.csv("./data/household_spending.csv", (d) => {
   .then((data) => {
     // Define new grouped categories
     const newCategories = {
-      "Total Expenditure": ["Total expenditure"],
+    
       "Income Taxes": ["Income taxes 8"],
       "Basic Needs": ["Shelter", "Food expenditures", "Health care", "Personal insurance payments and pension contributions"],
       "Lifestyle and Education": ["Clothing and accessories", "Transportation", "Education"],
@@ -105,7 +105,7 @@ d3.csv("./data/household_spending.csv", (d) => {
       .range(d3.schemeCategory10);
 
     // Stack the data with "Total Expenditure" and "Income Taxes" on top
-    const stackOrder = Object.keys(newCategories).filter(key => key !== "Total Expenditure" && key !== "Income Taxes").concat(["Income Taxes", "Total Expenditure"]);
+    const stackOrder = Object.keys(newCategories).filter(key => key !== "Income Taxes").concat(["Income Taxes"]);
     const stack = d3.stack()
       .keys(stackOrder)
       .value((d, key) => d[key]);
