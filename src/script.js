@@ -50,7 +50,7 @@ function generateChart(e) {
       return;
     case "income":
       console.log("showing income");
-      return;
+      return incomeChart();
     case "spending":
       console.log("showing spending");
       return spendingChart();
@@ -237,6 +237,125 @@ function spendingChart() {
         .text((d) => d.key);
     })
     .catch((error) => {
+      console.error("Error loading or processing data:", error);
+    });
+}
+
+function incomeChart() {
+  const svg = d3
+    .select("#chart")
+    .append("svg")
+    .attr("id", "chartInner")
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  // Add title
+  svg
+    .append("text")
+    .attr("x", (width - margin.left - margin.right) / 2)
+    .attr("y", -margin.top / 2)
+    .attr("text-anchor", "middle")
+    .style("font-size", "20px")
+    .style("font-weight", "bold")
+    .text("Income Change Over Years by Family Type");
+
+  // Load and process data
+  return d3
+    .csv("./data/household_income.csv", (d) => {
+      const parsed = {
+        category: d["Family type"],
+        ageGroup: d["Age of older adult"],
+        years: Object.keys(d).reduce((acc, key) => {
+          if (key !== "Family type" && key !== "Age of older adult") {
+            acc[key] = d[key] === ".." ? null : +d[key].replace(/,/g, "");
+          }
+          return acc;
+        }, {}),
+      };
+      return parsed;
+    })
+    .then((data) => {
+      console.log("Data loaded:", data);
+
+      // Define categories
+      const categories = ["Couple families", "Lone-parent families", "Persons not in census families"];
+      const years = Object.keys(data[0].years).map(d => +d);
+
+      // Prepare data for line chart
+      const series = categories.map(category => ({
+        name: category,
+        values: years.map(year => ({
+          year: year,
+          value: data.find(d => d.category === category).years[year]
+        }))
+      }));
+
+      // Filter valid data
+      const validData = series.map(s => ({
+        name: s.name,
+        values: s.values.filter(v => v.value !== null)
+      }));
+
+      // Create scales
+      const x = d3
+        .scaleTime()
+        .domain(d3.extent(years, d => d))
+        .range([0, width - margin.left - margin.right]);
+
+      const y = d3
+        .scaleLinear()
+        .domain([
+          0,
+          d3.max(validData, s => d3.max(s.values, v => v.value))
+        ])
+        .nice()
+        .range([height - margin.top - margin.bottom, 0]);
+
+      const color = d3.scaleOrdinal().domain(categories).range(d3.schemeCategory10);
+
+      // Create line generator
+      const line = d3
+        .line()
+        .x(d => x(d.year))
+        .y(d => y(d.value));
+
+      // Append lines for each category
+      validData.forEach(category => {
+        svg
+          .append("path")
+          .datum(category.values)
+          .attr("fill", "none")
+          .attr("stroke", color(category.name))
+          .attr("stroke-width", 1.5)
+          .attr("d", line);
+      });
+
+      // Add x-axis
+      svg
+        .append("g")
+        .attr(
+          "transform",
+          `translate(0,${height - margin.top - margin.bottom})`
+        )
+        .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%Y")));
+
+      // Add y-axis
+      svg.append("g").call(d3.axisLeft(y));
+
+      // Add legend
+      validData.forEach((category, index) => {
+        svg
+          .append("text")
+          .attr("x", width - margin.right + 5)
+          .attr("y", index * 20)
+          .attr("dy", "0.35em")
+          .style("fill", color(category.name))
+          .text(category.name);
+      });
+    })
+    .catch(error => {
       console.error("Error loading or processing data:", error);
     });
 }
