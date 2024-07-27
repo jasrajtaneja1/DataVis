@@ -96,25 +96,25 @@ function spendingChart() {
           "Household operations",
           "Household furnishings and equipment",
         ],
-        "Lifestyle and Education": ["Clothing and accessories", "Education"],
-        Miscellaneous: [
-          "Reading materials and other printed matter",
-          "Tobacco products, alcoholic beverages and cannabis",
-          "Games of chance",
-          "Miscellaneous expenditures",
-          "Gifts of money, support payments and charitable contributions",
-        ],
         Food: ["Food purchased from stores", "Food purchased from restaurants"],
         Transportation: ["Private transportation", "Public transportation"],
+        "Health Care": ["Health care", "Personal care"],
+        "Insurance and Pension": [
+          "Personal insurance payments and pension contributions",
+        ],
+        "Lifestyle and Education": ["Clothing and accessories", "Education"],
         Recreation: [
           "Recreational equipment and related services",
           "Home entertainment equipment and services",
           "Recreational services",
           "Recreational vehicles and associated services",
         ],
-        "Health Care": ["Health care", "Personal care"],
-        "Insurance and Pension": [
-          "Personal insurance payments and pension contributions",
+        Miscellaneous: [
+          "Reading materials and other printed matter",
+          "Tobacco products, alcoholic beverages and cannabis",
+          "Games of chance",
+          "Miscellaneous expenditures",
+          "Gifts of money, support payments and charitable contributions",
         ],
       };
 
