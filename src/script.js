@@ -2,46 +2,13 @@ const width = 1000;
 const height = 700;
 const margin = { top: 80, right: 400, bottom: 50, left: 60 };
 
-function generateYearsList(min = 2001) {
-  let years = [{ value: 0, text: " -- " }];
-  for (let i = min; i < 2022; i++) {
-    var singleObj = {};
-    singleObj["value"] = i;
-    singleObj["text"] = `${i}`;
-    years.push(singleObj);
-  }
-  return years;
-}
-
-function updateYearOptions() {
-  minYear.innerHTML = "";
-  maxYear.innerHTML = "";
-
-  const selectedContent = chartContent.value;
-  const min = selectedContent === "income" ? 2001 : 2010;
-  const years = generateYearsList(min);
-
-  // Populate minYear dropdown
-  years.forEach((year) => {
-    const option = document.createElement("option");
-    option.value = year.value;
-    option.textContent = year.text;
-    minYear.appendChild(option);
-  });
-  years.forEach((year) => {
-    const option = document.createElement("option");
-    option.value = year.value;
-    option.textContent = year.text;
-    maxYear.appendChild(option);
-  });
-}
-
-function parseData(data) {
+function parseData(data, minYear = 0, maxYear = 0) {
   const parsedData = {
     years: {},
     category: "",
     ageGroup: "",
     familyType: "",
+    product: "",
   };
   for (const key in data) {
     if (data.hasOwnProperty(key)) {
@@ -78,22 +45,6 @@ function parseData(data) {
   return parsedData;
 }
 
-// Event Listeners
-const types = [];
-const form = document.querySelector("form");
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  types.forEach((e) => types.pop());
-  document.querySelectorAll('[type="checkbox"]').forEach((e) => {
-    if (e.checked === true) {
-      console.log(`submitted ${e.value}`);
-      types.push(e.value);
-    }
-  });
-  console.log(`types: ${types}`);
-});
-chartContent.addEventListener("change", updateYearOptions);
-
 document.getElementById("chartContent").onchange = () => {
   generateChart(document.getElementById("chartContent"));
 };
@@ -110,7 +61,7 @@ function generateChart(e) {
       return incomeChart();
     case "spending":
       console.log("showing spending");
-      return createProductCostChart();
+      return createProductCostLineChart();
     default:
       console.log("unknown");
       return;
@@ -672,7 +623,12 @@ d3.csv("./data/consumer_product_cost.csv").then(data => {
   console.error("Error loading CSV data:", error);
 });
 
-function createProductCostChart() {
+function sanitizeClassName(name) {
+  return name.replace(/[^a-zA-Z0-9_-]/g, "_");
+}
+
+function createProductCostLineChart() {
+  spendingChart();
   const svg = d3
     .select("#chart")
     .append("svg")
@@ -693,74 +649,117 @@ function createProductCostChart() {
 
   d3.csv("./data/consumer_product_cost.csv").then((data) => {
     const parsedData = parseDataByYear(data);
+    console.log("Parsed data for products:", parsedData);
 
-    const x = d3.scaleBand().range([0, width - margin.left - margin.right]).padding(0.1);
-    const y = d3.scaleLinear().range([height - margin.top - margin.bottom, 0]);
+    const selectedProducts = [
+      "Apples, 1 kilogram",
+      "Chicken, 1 kilogram",
+      "Ground beef, 1 kilogram",
+      "Toothpaste, 100 millilitres",
+      "Shampoo, 300 millilitres",
+      
+      "Eggs, 1 dozen",
+      "Coffee, instant, 200 grams",
+      "Bathroom tissue (4 rolls)"
+    ];
+
+    const allValues = selectedProducts.flatMap(product => parsedData[product]?.map(d => d.averagePrice) || []);
+    const maxPrice = d3.max(allValues);
+
+    const x = d3
+      .scaleTime()
+      .domain([new Date(2000, 0, 1), new Date(2021, 0, 1)])
+      .range([0, width - margin.left - margin.right]);
+
+    const y = d3
+      .scaleLinear()
+      .domain([0, maxPrice])
+      .nice()
+      .range([height - margin.top - margin.bottom, 0]);
+
     const color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    const updateChart = (selectedYear) => {
-      const yearData = Object.entries(parsedData).map(([product, values]) => {
-        const yearValue = values.find((v) => v.year === selectedYear);
-        return {
-          product: product,
-          averagePrice: yearValue ? yearValue.averagePrice : 0,
-        };
-      });
+    const line = d3
+      .line()
+      .x((d) => x(new Date(d.year, 0, 1)))
+      .y((d) => y(d.averagePrice));
 
-      x.domain(yearData.map((d) => d.product));
-      y.domain([0, d3.max(yearData, (d) => d.averagePrice)]);
+    selectedProducts.forEach((product) => {
+      const sanitizedProduct = sanitizeClassName(product);
 
-      svg.selectAll(".bar").remove();
-      svg.selectAll(".x-axis").remove();
-      svg.selectAll(".y-axis").remove();
+      if (parsedData[product]) {
+        svg
+          .append("path")
+          .datum(parsedData[product])
+          .attr("fill", "none")
+          .attr("stroke", color(product))
+          .attr("stroke-width", 1.5)
+          .attr("d", line);
 
-      svg
-        .selectAll(".bar")
-        .data(yearData)
-        .enter()
-        .append("rect")
-        .attr("class", "bar")
-        .attr("x", (d) => x(d.product))
-        .attr("width", x.bandwidth())
-        .attr("y", (d) => y(d.averagePrice))
-        .attr("height", (d) => height - margin.top - margin.bottom - y(d.averagePrice))
-        .attr("fill", (d) => color(d.product));
+        svg
+          .selectAll(`.dot.${sanitizedProduct}`)
+          .data(parsedData[product])
+          .enter()
+          .append("circle")
+          .attr("class", `dot ${sanitizedProduct}`)
+          .attr("cx", (d) => x(new Date(d.year, 0, 1)))
+          .attr("cy", (d) => y(d.averagePrice))
+          .attr("r", 3)
+          .attr("fill", color(product));
+      }
+    });
 
-      svg
-        .append("g")
-        .attr("class", "x-axis")
-        .attr("transform", `translate(0,${height - margin.top - margin.bottom})`)
-        .call(d3.axisBottom(x))
-        .selectAll("text")
-        .attr("transform", "rotate(-45)")
-        .style("text-anchor", "end");
-
-      svg.append("g").attr("class", "y-axis").call(d3.axisLeft(y));
-    };
-
-    const slider = d3
-      .sliderBottom()
-      .min(2000)
-      .max(2021)
-      .step(1)
-      .width(400)
-      .default(2000)
-      .on("onchange", (val) => {
-        updateChart(val);
-      });
-
-    const gSlider = d3
-      .select("#chart")
-      .append("svg")
-      .attr("width", 500)
-      .attr("height", 100)
+    svg
       .append("g")
-      .attr("transform", "translate(30,30)");
+      .attr("transform", `translate(0,${height - margin.top - margin.bottom})`)
+      .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%Y")));
 
-    gSlider.call(slider);
+    svg.append("g").call(d3.axisLeft(y));
 
-    updateChart(2000);
+    svg
+    .append("text")
+    .attr("transform", `translate(${(width - margin.left - margin.right) / 2},${height - margin.top - margin.bottom + 40})`)
+    .style("text-anchor", "middle")
+    .style("font-size", "16px")
+    .text("Year");
+
+  // Y-axis label
+  svg
+    .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left + 20)
+    .attr("x", 0 - (height - margin.top - margin.bottom) / 2)
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .style("font-size", "16px")
+    .text("Average Price (in $)");
+
+    const legend = svg
+      .selectAll(".legend")
+      .data(selectedProducts)
+      .enter()
+      .append("g")
+      .attr("class", "legend")
+      .attr("transform", (d, i) => `translate(0,${i * 20})`);
+
+    legend
+      .append("rect")
+      .attr("x", width - margin.right + 20)
+      .attr("y", 0)
+      .attr("width", 10)
+      .attr("height", 10)
+      .style("fill", color);
+
+    legend
+      .append("text")
+      .attr("x", width - margin.right + 40)
+      .attr("y", 10)
+      .attr("dy", "0.35em")
+      .style("text-anchor", "start")
+      .text((d) => d);
   }).catch((error) => {
     console.error("Error loading CSV data:", error);
   });
+
+  
 }
