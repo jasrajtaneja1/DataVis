@@ -86,13 +86,33 @@ d3.csv("./data/household_spending.csv", (d) => {
   .then((data) => {
     // Define new grouped categories
     const newCategories = {
-      "Basic Needs": ["Shelter", "Food expenditures", "Health care"],
-      Lifestyle: ["Clothing and accessories", "Transportation", "Education"],
-      "Leisure and Contributions": [
-        "Recreation",
+      "Income Taxes": ["Income taxes"],
+      Housing: [
+        "Principal accommodation",
+        "Other accommodation",
+        "Household operations",
+        "Household furnishings and equipment",
+      ],
+      "Lifestyle and Education": ["Clothing and accessories", "Education"],
+      Miscellaneous: [
+        "Reading materials and other printed matter",
+        "Tobacco products, alcoholic beverages and cannabis",
+        "Games of chance",
+        "Miscellaneous expenditures",
         "Gifts of money, support payments and charitable contributions",
       ],
-      "Total expenditure": ["Total expenditure"],
+      Food: ["Food purchased from stores", "Food purchased from restaurants"],
+      Transportation: ["Private transportation", "Public transportation"],
+      Recreation: [
+        "Recreational equipment and related services",
+        "Home entertainment equipment and services",
+        "Recreational services",
+        "Recreational vehicles and associated services",
+      ],
+      "Health Care": ["Health care", "Personal care"],
+      "Insurance and Pension": [
+        "Personal insurance payments and pension contributions",
+      ],
     };
 
     // Aggregate data for each new category
@@ -146,9 +166,9 @@ d3.csv("./data/household_spending.csv", (d) => {
       .range(d3.schemeCategory10);
 
     // Stack the data with "Total expenditure" on top
-    const stackOrder = Object.keys(newCategories)
-      .filter((key) => key !== "Total expenditure")
-      .concat("Total expenditure");
+    const stackOrder = Object.keys(newCategories).filter(
+      (key) => key !== "Total expenditure"
+    );
     const stack = d3
       .stack()
       .keys(stackOrder)
