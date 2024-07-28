@@ -10,14 +10,73 @@
   </head>
   <body>
     <h1>Impact of Inflation Chart</h1>
-    <div style="margin-bottom: 10px">
-      <label for="chartContent">Select the Data:</label>
-      <select name="chartContent" id="chartContent">
-        <option value="all">Show Income and Spending</option>
-        <option value="income">Show Income Only</option>
-        <option value="spending">Show Spending Only</option>
-      </select>
-    </div>
+    <div style="margin-bottom: 10px" id="filter-box">
+        <form>
+          <div>
+            <label for="chartContent">Select the Data:</label>
+            <select name="chartContent" id="chartContent">
+              <option value="all">Show Income and Spending</option>
+              <option value="income">Show Income Only</option>
+              <option value="spending">Show Spending Only</option>
+            </select>
+            <label for="minYear">Min Year:</label>
+            <select name="minYear" id="minYear">
+              <option disabled selected value>--</option>
+              <option value="2001">2001</option>
+              <option value="2002">2002</option>
+              <option value="2003">2003</option>
+              <option value="2004">2004</option>
+              <option value="2005">2005</option>
+              <option value="2006">2006</option>
+              <option value="2007">2007</option>
+              <option value="2008">2008</option>
+              <option value="2009">2009</option>
+              <option value="2010">2010</option>
+              <option value="2011">2011</option>
+              <option value="2012">2012</option>
+              <option value="2013">2013</option>
+              <option value="2014">2014</option>
+              <option value="2015">2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+            </select>
+            <label for="maxYear">Max Year:</label>
+            <select name="maxYear" id="maxYear">
+              <option disabled selected value>--</option>
+              <option value="2001">2001</option>
+              <option value="2002">2002</option>
+              <option value="2003">2003</option>
+              <option value="2004">2004</option>
+              <option value="2005">2005</option>
+              <option value="2006">2006</option>
+              <option value="2007">2007</option>
+              <option value="2008">2008</option>
+              <option value="2009">2009</option>
+              <option value="2010">2010</option>
+              <option value="2011">2011</option>
+              <option value="2012">2012</option>
+              <option value="2013">2013</option>
+              <option value="2014">2014</option>
+              <option value="2015">2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+            </select>
+          </div>
+          <div id="dataShown" class="dataShown">
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
+            <label for="vehicle1"> I have a bike</label><br />
+          </div>
+          <br />
+          <input type="submit" value="Submit" />
+        </form>
     <div id="chart"></div>
     <script src="./script.js" defer></script>
   </body>
