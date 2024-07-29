@@ -674,11 +674,11 @@ function productCostChart(minYear = 0, maxYear = 0) {
       //   console.log("Parsed data for products:", parsedData);
 
       const selectedProducts = [
-        "Apples, 1 kilogram",
+        "Baby food, 128 millilitres",
         "Chicken, 1 kilogram",
         "Ground beef, 1 kilogram",
         "Toothpaste, 100 millilitres",
-        "Shampoo, 300 millilitres",
+        "Oranges, 1 kilogram",
 
         "Eggs, 1 dozen",
         "Coffee, instant, 200 grams",
