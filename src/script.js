@@ -569,8 +569,8 @@ function incomeAndSpendingChart(minYear = 0, maxYear = 0) {
     svg
       .append("path")
       .datum(avgSpending)
-      .attr("fill", "steelblue")
-      .attr("opacity", 0.5)
+      .attr("fill", "black")
+      .attr("opacity", 0.8)
       .attr("d", areaSpending)
       .attr("class", "spending-area");
 
@@ -578,7 +578,7 @@ function incomeAndSpendingChart(minYear = 0, maxYear = 0) {
       .append("path")
       .datum(avgIncome)
       .attr("fill", "lightgreen")
-      .attr("opacity", 0.5)
+      .attr("opacity", 0.7)
       .attr("d", areaIncome)
       .attr("class", "income-area");
 
