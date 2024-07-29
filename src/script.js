@@ -679,7 +679,6 @@ function productCostChart(minYear = 0, maxYear = 0) {
         "Ground beef, 1 kilogram",
         "Toothpaste, 100 millilitres",
         "Oranges, 1 kilogram",
-
         "Eggs, 1 dozen",
         "Coffee, instant, 200 grams",
         "Bathroom tissue (4 rolls)",
