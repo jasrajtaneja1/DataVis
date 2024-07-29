@@ -189,30 +189,6 @@ function spendingChart(minYear = 0, maxYear = 0) {
         ],
       };
 
-      const filterLabel = ` <form>
-                            <input type="checkbox" id="incomeTaxes" name="incomeTaxes" value="Bike" />
-                            <label for="incomeTaxes"> Income Taxes</label><br />
-                            <input type="checkbox" id="housing" name="housing" value="housing" />
-                            <label for="housing"> Housing</label><br />
-                            <input type="checkbox" id="Food" name="food" value="food" />
-                            <label for="food"> Food</label><br />
-                            <input type="checkbox" id="transportation" name="transportation" value="transportation" />
-                            <label for="transportation"> Transportation</label><br />
-                            <input type="checkbox" id="healthCare" name="healthCare" value="healthCare" />
-                            <label for="healthCare"> Health Care</label><br />
-                            <input type="checkbox" id="insurancePension" name="insurancePension" value="insurancePension" />
-                            <label for="insurancePension"> Insurance and Pension</label><br />
-                            <input type="checkbox" id="lifestyleEducation" name="lifestyleEducation" value="lifestyleEducation" />
-                            <label for="lifestyleEducation"> Lifestyle and Education</label><br />
-                            <input type="checkbox" id="recreation" name="recreation" value="recreation" />
-                            <label for="recreation"> Recreation</label><br />
-                            <input type="checkbox" id="miscellaneous" name="miscellaneous" value="miscellaneous" />
-                            <label for="miscellaneous"> Miscellaneous</label><br />
-                            <input type="submit" value="Submit" />
-                            </form>
-      `;
-      d3.select("#dataShown").html(filterLabel);
-
       // Aggregate data for each new category
       const years = Object.keys(data[0].years).map((year) => parseInt(year));
       const filteredYears = years.filter((year) => {
